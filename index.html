@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 
 <head>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script>
-    var collateral = prompt("What's the collateral? (Only Numbers Please)");
+    $(document).ready(function(){
+      var collateral = prompt("What's the collateral? (Only Numbers Please)");
     var m3 = prompt("What's the total m3? (Only Numbers & Periods Please)");
     var jumps = prompt("How many jumps (Only Numbers Please)");
     var reward = 0;
@@ -43,8 +45,9 @@
     isk_per_jump = reward / jumps;
     
     // Editing values
-    document.getElementById("reward").innerHTML = reward;
-    document.getElementById("ipj").innerHTML = isk_per_jump;
+    $('#reward').text(reward);
+    $('#iph').text(isk_per_jump);
+    });
   </script>
 </head>
 <body>
