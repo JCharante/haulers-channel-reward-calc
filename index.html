@@ -11,9 +11,7 @@
         var m3 = $('#m3').val();
         var jumps = $('#jumps').val();
         var reward = 0;
-        var isk_per_jump = 0;
         var min_jump = 0;
-        var max_jump = 0;
         // Shamelessly ripped from stack overflow
         function numberWithCommas(x) {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -33,28 +31,18 @@
             }
           }
         }
-        // Max Jump
-        if (m3 > 13795) {
-          max_jump = 2000000;
-        } else {
-          max_jump = 50000000;
-        }
         // Reward
         if (collateral * 0.001 < min_jump) {
           reward = min_jump * jumps;
         } else {
-          if (collateral * 0.001 > max_jump) {
-            reward = max_jump * jumps;
-          } else {
-            reward = collateral * 0.001 * jumps;
-          }
+          reward = collateral * 0.001 * jumps;
         }
-        // Isk Per Jump
-        isk_per_jump = reward / jumps;
         
         // Editing values
-        $('#reward').text(numberWithCommas(reward));
-        $('#reward_per_jump').text(numberWithCommas(isk_per_jump));
+        $('#normal_reward').text(numberWithCommas(reward));
+        $('#special_reward').text(numberWithCommas(reward * 2));
+        $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
+        $('#special_reward_ipj').text(numberWithCommas((reward * 2) / jumps));
       });
     });
   </script>
@@ -64,15 +52,11 @@
     <div class="row">
       <form class="col s12">
         <div class="row">
-          <div class="input-field col s4">
+          <div class="input-field col s6">
             <input id="collateral" type="text" class="validate">
             <label for="collateral">Collateral</label>
           </div>
-          <div class="input-field col s4">
-            <input id="m3" type="text" class="validate">
-            <label for="m3">Total m3</label>
-          </div>
-          <div class="input-field col s4">
+          <div class="input-field col s6">
             <input id="jumps" type="text" class="validate">
             <label for="jumps"># of Jumps</label>
           </div>
@@ -81,19 +65,25 @@
       <a class="waves-effect waves-light btn col s12 calculate">Calculate!</a>
       <hr>
       <div class="col s6">
-        <h1>Reward:</h1>
-        <h3 id="reward"></h3>
+        <h1>Normal Delivery / Highsec Reward:</h1>
+        <h3 id="normal_reward"></h3>
+        <hr>
+        <h2>Isk Per Jump:</h2>
+        <h3 id="normal_reward_ipj"></h3>
       </div>
       <div class="col s6">
-        <h1>Reward Per Jump:</h1>
-        <h3 id="reward_per_jump"></h3>
+        <h1>Rush Delivery / Lowsec Reward:</h1>
+        <h3 id="special_reward"></h3>
+        <hr>
+        <h2>Isk Per Jump:</h2>
+        <h3 id="special_reward_ipj"></h3>
       </div>
   </div>
   </div>
    <footer class="page-footer">
           <div class="footer-copyright">
             <div class="container">
-              (Being) Developed by Rashad Charante, Gib Isk Please
+              (Being) Developed by Rashad Charante, Commissioned By Rita Jita
             </div>
           </div>
         </footer>
