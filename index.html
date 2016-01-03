@@ -2,57 +2,99 @@
 
 <head>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script>
     $(document).ready(function(){
-      var collateral = prompt("What's the collateral? (Only Numbers Please)");
-      var m3 = prompt("What's the total m3? (Only Numbers & Periods Please)");
-      var jumps = prompt("How many jumps (Only Numbers Please)");
-      var reward = 0;
-      var isk_per_jump = 0;
-      var min_jump = 0;
-      var max_jump = 0;
-      // Min Jump
-      if (jumps <= 10) {
-        min_jump = 1000000;
-      } else {
-        if (jumps <= 15) {
-          min_jump = 750000;
+      $('.calculate').click(function() {
+        var collateral = $('#collateral').val();
+        var m3 = $('#m3').val();
+        var jumps = $('#jumps').val();
+        var reward = 0;
+        var isk_per_jump = 0;
+        var min_jump = 0;
+        var max_jump = 0;
+        // Shamelessly ripped from stack overflow
+        function numberWithCommas(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Min Jump
+        if (jumps <= 10) {
+          min_jump = 1000000;
         } else {
-          if (jumps <= 25) {
-            min_jump = 500000;
+          if (jumps <= 15) {
+            min_jump = 750000;
           } else {
-            min_jump = 250000;
+            if (jumps <= 25) {
+              min_jump = 500000;
+            } else {
+              min_jump = 250000;
+            }
           }
         }
-      }
-      // Max Jump
-      if (m3 > 13795) {
-        max_jump = 2000000;
-      } else {
-        max_jump = 50000000;
-      }
-      // Reward
-      if (collateral * 0.001 < min_jump) {
-        reward = min_jump * jumps;
-      } else {
-        if (collateral * 0.001 > max_jump) {
-          reward = max_jump * jumps;
+        // Max Jump
+        if (m3 > 13795) {
+          max_jump = 2000000;
         } else {
-          reward = collateral * 0.001 * jumps;
+          max_jump = 50000000;
         }
-      }
-      // Isk Per Jump
-      isk_per_jump = reward / jumps;
-      
-      // Editing values
-      $('#reward').text(reward);
-      $('#ipj').text(isk_per_jump);
+        // Reward
+        if (collateral * 0.001 < min_jump) {
+          reward = min_jump * jumps;
+        } else {
+          if (collateral * 0.001 > max_jump) {
+            reward = max_jump * jumps;
+          } else {
+            reward = collateral * 0.001 * jumps;
+          }
+        }
+        // Isk Per Jump
+        isk_per_jump = reward / jumps;
+        
+        // Editing values
+        $('#reward').text(numberWithCommas(reward));
+        $('#reward_per_jump').text(numberWithCommas(isk_per_jump));
+      });
     });
   </script>
 </head>
 <body>
-  <h1>Reward</h1>
-  <h3 id="reward">_</h3>
-  <h1>Isk Per Jump</h1>
-  <h3 id="ipj">_</h3>
+  <div class="container">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="collateral" type="text" class="validate">
+            <label for="collateral">Collateral</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="m3" type="text" class="validate">
+            <label for="m3">Total m3</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="jumps" type="text" class="validate">
+            <label for="jumps"># of Jumps</label>
+          </div>
+        </div>
+      </form>
+      <a class="waves-effect waves-light btn col s12 calculate">Calculate!</a>
+      <hr>
+      <div class="col s6">
+        <h1>Reward:</h1>
+        <h3 id="reward"></h3>
+      </div>
+      <div class="col s6">
+        <h1>Reward Per Jump:</h1>
+        <h3 id="reward_per_jump"></h3>
+      </div>
+  </div>
+  </div>
+   <footer class="page-footer">
+          <div class="footer-copyright">
+            <div class="container">
+              (Being) Developed by Rashad Charante, Gib Isk Please
+            </div>
+          </div>
+        </footer>
 </body>
