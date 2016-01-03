@@ -1,5 +1,55 @@
 <!DOCTYPE html>
 
+<head>
+  <script>
+    var collateral = prompt("What's the collateral? (Only Numbers Please)");
+    var m3 = prompt("What's the total m3? (Only Numbers & Periods Please)");
+    var jumps = prompt("How many jumps (Only Numbers Please)");
+    var reward = 0;
+    var isk_per_jump = 0;
+    var min_jump = 0;
+    var max_jump = 0;
+    // Min Jump
+    if (jumps <= 10) {
+      min_jump = 1000000;
+    } else {
+      if (jumps <= 15) {
+        min_jump = 750000;
+      } else {
+        if (jumps <= 25) {
+          min_jump = 500000;
+        } else {
+          min_jump = 250000;
+        }
+      }
+    }
+    // Max Jump
+    if (m3 > 13795) {
+      max_jump = 2000000;
+    } else {
+      max_jump = 50000000;
+    }
+    // Reward
+    if (collateral * 0.001 < min_jump) {
+      reward = min_jump * jumps;
+    } else {
+      if (collateral * 0.001 > max_jump) {
+        reward = max_jump * jumps;
+      } else {
+        reward = collateral * 0.001 * jumps;
+      }
+    }
+    // Isk Per Jump
+    isk_per_jump = reward / jumps;
+    
+    // Editing values
+    document.getElementById("reward").innerHTML = reward;
+    document.getElementById("ipj").innerHTML = isk_per_jump;
+  </script>
+</head>
 <body>
-  <p>rawr</p>
+  <h1>Reward</h1>
+  <h3 id="reward">_</h3>
+  <h1>Isk Per Jump</h1>
+  <h3 id="ipj">_</h3>
 </body>
