@@ -4,6 +4,7 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="style.css">
   <script>
     $(document).ready(function(){
       $('.calculate').click(function() {
@@ -37,17 +38,28 @@
         } else {
           reward = collateral * 0.001 * jumps;
         }
+
+        if ($('#rush').prop('checked')) {
+          reward = reward * 2;
+        }
+
+        if ($('#lowsec').prop('checked')) {
+          reward = reward * 2;
+        }
         
         // Editing values
-        $('#normal_reward').text(numberWithCommas(reward));
-        $('#special_reward').text(numberWithCommas(reward * 2));
-        $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
-        $('#special_reward_ipj').text(numberWithCommas((reward * 2) / jumps));
+        $('#normal_reward').text(numberWithCommas(reward) + " ISK");
+        $('#normal_reward_ipj').text(numberWithCommas(reward / jumps) + " ISK");
       });
     });
   </script>
 </head>
 <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Haulers Channel - Base Rate Calculator</a>
+    </div>
+  </nav>
   <div class="container">
     <div class="row">
       <form class="col s12">
@@ -62,29 +74,48 @@
           </div>
         </div>
       </form>
-      <a class="waves-effect waves-light btn col s12 calculate">Calculate!</a>
+      <div class="col s12">
+        <p></p>
+      </div>
+      <!-- Switches -->
+      <div class="col s7 offset-s5">
+        <div class="switch">
+          <label>
+            Normal Speed
+            <input type="checkbox" id="rush">
+            <span class="lever"></span>
+            Rush Job
+          </label>
+        </div>
+        <div class="switch">
+          <label>
+            Highsec
+            <input type="checkbox" id="lowsec">
+            <span class="lever"></span>
+            Lowsec
+          </label>
+        </div>
+      </div>
+      <div class="col s12">
+        <p></p>
+      </div>
       <hr>
-      <div class="col s6">
-        <h1>Normal Delivery / Highsec Reward:</h1>
+      <!-- Calculate Button -->
+      <a class="waves-effect waves-light btn col s12 calculate">Calculate!</a>
+      <div class="col s4 offset-s4">
+        <h1>Reward:</h1>
         <h3 id="normal_reward"></h3>
         <hr>
         <h2>Isk Per Jump:</h2>
         <h3 id="normal_reward_ipj"></h3>
       </div>
-      <div class="col s6">
-        <h1>Rush Delivery / Lowsec Reward:</h1>
-        <h3 id="special_reward"></h3>
-        <hr>
-        <h2>Isk Per Jump:</h2>
-        <h3 id="special_reward_ipj"></h3>
+    </div>
+  </div>
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+        (Being) Developed by Rashad Charante, Commissioned By Rita Jita
       </div>
-  </div>
-  </div>
-   <footer class="page-footer">
-          <div class="footer-copyright">
-            <div class="container">
-              (Being) Developed by Rashad Charante, Commissioned By Rita Jita
-            </div>
-          </div>
-        </footer>
+    </div>
+  </footer>
 </body>
