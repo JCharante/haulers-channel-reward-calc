@@ -58,8 +58,8 @@
         
         // updates prices displayed in text
         if (reward > 0) {
-          $('#normal_reward').text(numberWithCommas(reward) + " ISK");
-          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps) + " ISK");
+          $('#normal_reward').text(numberWithCommas(reward));
+          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
         }
       });
     });
@@ -72,8 +72,8 @@
         <div class="row">
           <!-- Header -->
           <div class="header col s12">
-            <h1 class="blue-text darken-4 center-align">Haulers Channel</h1>
-            <h4 class="blue-text darken-4 center-align" style="margin-top: -20px; margin-bottom: 30px">Base Rate Calculator</h4>
+            <h1 class="center-align" style="color: #FFFFFF">Haulers Channel</h1>
+            <h4 class="grey-text darken-3 center-align" style="margin-top: -20px; margin-bottom: 40px">Base Rate Calculator</h4>
           </div>
           <!--<hr>-->
           <!-- Input Area -->
@@ -105,7 +105,7 @@
                         <p class="center-align" data-clipboard-target="#normal_reward">
                           Copy To Clipboard
                         </p>
-                        <h4 class="center-align" style="color: #FFFFFF">Isk Per Jump: <span id="normal_reward_ipj"></span></h1>
+                        <h4 class="center-align" style="color: #FFFFFF">ISK Per Jump: <span id="normal_reward_ipj"></span></h1>
                       </div>
                     </div>
                   </div>
