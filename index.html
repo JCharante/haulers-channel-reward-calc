@@ -7,11 +7,30 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"></script>
+  <script src="utils.js"></script>
   <script>
     $(document).ready(function(){
 
       new Clipboard('i');
       new Clipboard('p');
+
+      /*
+      // Commented out because on many browsers if this isn't triggered by a click it'll return a false negative
+      var copySupported = document.queryCommandSupported('copy');
+      
+      if (!copySupported) {
+        // This also isn't working :/
+        $("<p class='center-align' data-clipboard-target='#normal_reward'>Copy To Clipboard</p>").before('.isk_per_jump');
+      }
+
+      */
+
+      var stuff_to_copy_to_clipboard = "";
+
+      $('.output_area').click(function() {
+        // Copies price to clipboard when the output area is clicked
+        copyTextToClipboard(stuff_to_copy_to_clipboard);
+      });
 
       $('html').click(function() {
         // Reward Rates by Rita Jita, site made by Rashad Charante
@@ -46,8 +65,6 @@
         }
 
         // Extra Fees
-        
-
         if ($('#rush').prop('checked')) {
           reward = reward * 2;
         }
@@ -60,6 +77,7 @@
         if (reward > 0) {
           $('#normal_reward').text(numberWithCommas(reward));
           $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
+          stuff_to_copy_to_clipboard = reward;
         }
       });
     });
@@ -97,15 +115,12 @@
               <!-- Right Side -->
               <div class="col s8">
                   <!-- Output Area -->
-                  <div class="col s12">
+                  <div class="col s12 output_area">
                     <div class="row">
                       <!-- Bottom Area -->
-                      <div class="col s12">
+                      <div class="col s12 bottom_area">
                         <h4 class="center-align" style="color: #FFFFFF">Reward: <span id="normal_reward"></span></h1>
-                        <p class="center-align" data-clipboard-target="#normal_reward">
-                          Copy To Clipboard
-                        </p>
-                        <h4 class="center-align" style="color: #FFFFFF">ISK Per Jump: <span id="normal_reward_ipj"></span></h1>
+                        <h4 class="center-align isk_per_jump" style="color: #FFFFFF">ISK Per Jump: <span id="normal_reward_ipj"></span></h1>
                       </div>
                     </div>
                   </div>
