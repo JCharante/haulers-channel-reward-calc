@@ -65,7 +65,7 @@
     });
   </script>
 </head>
-<body class="grey darken-4">
+<body class="grey darken-3">
   <div class="container">
     <div class="row">
       <div class="round_box grey darken-3 col s12" style="margin-top: 30px;">
@@ -80,7 +80,7 @@
           <div class="col s12 input_area">
             <div class="row">
               <!-- Left Side -->
-              <div class="col s6">
+              <div class="col s4">
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
@@ -95,36 +95,35 @@
                 </form>
               </div>
               <!-- Right Side -->
-              <div class="col s6">
-                  <form action="#">
-                    <p>
-                      <input type="checkbox" class="filled-in" id="rush"/>
-                      <label for="rush">Rush Delivery (2x Reward)</label>
-                    </p>
-                    <p>
-                      <input type="checkbox" class="filled-in" id="lowsec"/>
-                      <label for="lowsec">Lowsec (2x Reward)</label>
-                    </p>
-                  </form>
+              <div class="col s8">
+                  <!-- Output Area -->
+                  <div class="col s12">
+                    <div class="row">
+                      <!-- Bottom Area -->
+                      <div class="col s12">
+                        <h2 class="center-align" style="color: #FFFFFF">Reward</h1>
+                        <h4 class="center-align" id="normal_reward" style="color: #FFFFFF"></h3>
+                        <p class="center-align" data-clipboard-target="#normal_reward">
+                          Copy To Clipboard
+                        </p>
+                        <h2 class="center-align" style="color: #FFFFFF">Isk Per Jump</h1>
+                        <h4 class="center-align" id="normal_reward_ipj" style="color: #FFFFFF"></h3>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
           <hr>
-          <!-- Output Area -->
-          <div class="col s12">
-            <div class="row">
-              <!-- Bottom Area -->
-              <div class="col s12">
-                <h2 class="center-align" style="color: #FFFFFF">Reward</h1>
-                <h4 class="center-align" id="normal_reward" style="color: #FFFFFF"></h3>
-                <p class="center-align" data-clipboard-target="#normal_reward">
-                  Copy To Clipboard
-                </p>
-                <h2 class="center-align" style="color: #FFFFFF">Isk Per Jump</h1>
-                <h4 class="center-align" id="normal_reward_ipj" style="color: #FFFFFF"></h3>
-              </div>
-            </div>
-          </div>
+          <!-- Options Area -->
+          <form action="#">
+            <p class="center-align">
+              <input type="checkbox" class="filled-in" id="rush"/>
+              <label for="rush">Rush Delivery (2x Reward)</label>
+              <input type="checkbox" class="filled-in" id="lowsec"/>
+              <label for="lowsec">Lowsec (2x Reward)</label>
+            </p>
+          </form>
           <!-- Footer -->
           <hr>
           <p class="center-align" style="color: #FFFFFF"><span style="color: yellow">Disclaimer: </span>The Final price is entirely up to yourself.</p>
