@@ -17,33 +17,30 @@
         // Reward Rates by Rita Jita, site made by Rashad Charante
         var collateral = $('#collateral').val();
         var jumps = $('#jumps').val();
+        var m3 = $('#m3').val();
         var reward = 0;
-        var min_jump = 0;
+        var base_rate = 0;
         // Shamelessly ripped from stack overflow
         function numberWithCommas(x) {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Min Jump
-        if (jumps <= 10) {
-          min_jump = 1000000;
+        // Base Rate (Per Jump)
+        if (m3 <= 12500) {
+          base_rate = 250000;
+        } else if (m3 <= 62500) {
+          base_rate = 500000;
         } else {
-          if (jumps <= 15) {
-            min_jump = 750000;
-          } else {
-            if (jumps <= 25) {
-              min_jump = 500000;
-            } else {
-              min_jump = 250000;
-            }
-          }
+          base_rate = 1000000;
         }
+
+
         // Reward
-        if (collateral * 0.001 < min_jump) {
-          reward = min_jump * jumps;
-        } else {
-          reward = collateral * 0.001 * jumps;
-        }
+
+          reward = base_rate * jumps * Math.ceil(collateral / 1000000000);
+
+        // Extra Fees
+        
 
         if ($('#rush').prop('checked')) {
           reward = reward * 2;
@@ -53,7 +50,7 @@
           reward = reward * 2;
         }
         
-        // Editing values
+        // updates prices displayed in text
         if (reward > 0) {
           $('#normal_reward').text(numberWithCommas(reward) + " ISK");
           $('#normal_reward_ipj').text(numberWithCommas(reward / jumps) + " ISK");
@@ -80,6 +77,10 @@
               <div class="col s6">
                 <form class="col s12">
                   <div class="row">
+                    <div class="input-field col s12">
+                      <input id="m3" type="text" class="validate">
+                      <label for="m3">Volume (m3)</label>
+                    </div>
                     <div class="input-field col s12">
                       <input id="collateral" type="text" class="validate">
                       <label for="collateral">Collateral</label>
@@ -122,6 +123,9 @@
               </div>
             </div>
           </div>
+          <!-- Footer -->
+          <hr>
+          <p class="center-align" style="color: #FFFFFF">Disclaimer: This is a Base Rate Calculator intended for use by people new to creating courier contracts, this means that this is the base mininum reward.</p>
         </div>
       </div>
     </div>
