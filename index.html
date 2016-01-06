@@ -17,7 +17,6 @@
         // Reward Rates by Rita Jita, site made by Rashad Charante
         var collateral = $('#collateral').val();
         var jumps = $('#jumps').val();
-        var m3 = $('#m3').val();
         var reward = 0;
         var base_rate = 0;
         // Shamelessly ripped from stack overflow
@@ -25,19 +24,26 @@
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Base Rate (Per Jump)
-        if (m3 <= 12500) {
-          base_rate = 250000;
-        } else if (m3 <= 60000) {
-          base_rate = 500000;
-        } else {
+        // Base Rate
+        if (jumps <= 10) {
           base_rate = 1000000;
+        } else {
+          if (jumps <= 15) {
+            base_rate = 750000;
+          } else {
+            if (jumps <= 25) {
+              base_rate = 500000;
+            } else {
+              base_rate = 250000;
+            }
+          }
         }
-
-
         // Reward
-
-          reward = base_rate * jumps * Math.ceil(collateral / 1000000000);
+        if (collateral * 0.001 < base_rate) {
+          reward = base_rate * jumps;
+        } else {
+          reward = collateral * 0.001 * jumps;
+        }
 
         // Extra Fees
         
@@ -77,10 +83,6 @@
               <div class="col s6">
                 <form class="col s12">
                   <div class="row">
-                    <div class="input-field col s12">
-                      <input id="m3" type="text" class="validate">
-                      <label for="m3">Volume (m3)</label>
-                    </div>
                     <div class="input-field col s12">
                       <input id="collateral" type="text" class="validate">
                       <label for="collateral">Collateral</label>
@@ -125,7 +127,12 @@
           </div>
           <!-- Footer -->
           <hr>
-          <p class="center-align" style="color: #FFFFFF">Disclaimer: This is a Base Rate Calculator intended for use by people new to creating courier contracts, this means that this is the base mininum reward.</p>
+          <p class="center-align" style="color: #FFFFFF"><span style="color: yellow">Disclaimer: </span>The Final price is entirely up to yourself.</p>
+          <p class="center-align" style="color: #FFFFFF"> This calculator is intended for people new to courier contracts, anything under these values will normally move slower than normal., and posibly not at all.
+          </p>
+          <p class="center-align" style="color: #FFFFFF">
+          Note: <i>The more you pay </i> = the less you wait.
+          </p>
         </div>
       </div>
     </div>
