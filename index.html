@@ -114,8 +114,8 @@
         
         // updates prices displayed in text
         if (reward > 0) {
-          $('#normal_reward').text(numberWithCommas(reward) + " ISK");
-          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps) + " ISK");
+          $('#normal_reward').text(numberWithCommas(reward));
+          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
           stuff_to_copy_to_clipboard = reward;
         }
       });
