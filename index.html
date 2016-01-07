@@ -114,6 +114,8 @@
         
         // updates prices displayed in text
         if (reward > 0) {
+          $('#reward_label').addClass('active');
+          $('#reward_ipj_label').addClass('active');
           $('#reward').val(numberWithCommas(reward.toFixed(2)));
           var ipj = reward / jumps
           ipj = ipj.toFixed(2);
@@ -164,12 +166,12 @@
                     <div class="row bottom_area">
                       <!-- Bottom Area -->
                       <div class="input-field col s12">
-                        <input style="color: green;" value=" " id="reward" type="text" class="validate">
-                        <label class="active" for="reward">Reward</label>
+                        <input style="color: green;" id="reward" type="text" class="validate">
+                        <label id="reward_label" for="reward">Reward</label>
                       </div>
                       <div class="input-field col s12">
-                        <input style="color: green;" value=" " id="reward_ipj" type="text" class="validate">
-                        <label class="active" for="reward_ipj">Reward Per Jump</label>
+                        <input style="color: green;" id="reward_ipj" type="text" class="validate">
+                        <label id="reward_ipj_label" for="reward_ipj">Reward Per Jump</label>
                       </div>
                       <p class="left-align" style="margin-left: 10px">
                         <input type="checkbox" class="filled-in" id="lowsec"/>
