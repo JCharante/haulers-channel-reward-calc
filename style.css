@@ -5,3 +5,9 @@
 i {
 	display: inline-block;
 }
+
+@font-face { font-family: aldhabi; src: url('aldhabi.otf'); }
+
+.title {
+	font-family: aldhabi;
+}
