@@ -114,8 +114,10 @@
         
         // updates prices displayed in text
         if (reward > 0) {
-          $('#normal_reward').text(numberWithCommas(reward));
-          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
+          $('#reward').val(numberWithCommas(reward.toFixed(2)));
+          var ipj = reward / jumps
+          ipj = ipj.toFixed(2);
+          $('#reward_ipj').val(numberWithCommas(ipj));
           stuff_to_copy_to_clipboard = reward;
         }
       });
@@ -137,7 +139,7 @@
           <div class="col s12 input_area">
             <div class="row">
               <!-- Left Side -->
-              <div class="col s2 offset-s3">
+              <div class="col s2 offset-s4">
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
@@ -148,34 +150,36 @@
                       <input id="jumps" type="text" class="validate">
                       <label for="jumps"># of Jumps</label>
                     </div>
+                    <p class="left-align" style="margin-left: 10px">
+                      <input type="checkbox" class="filled-in" id="rush"/>
+                      <label for="rush">Rush Delivery &nbsp;&nbsp;</label>
+                    </p>
                   </div>
                 </form>
               </div>
               <!-- Right Side -->
-              <div class="col s7">
+              <div class="col s2" style="margin-left: -20px">
                   <!-- Output Area -->
                   <div class="col s12 output_area">
-                    <div class="row">
+                    <div class="row bottom_area">
                       <!-- Bottom Area -->
-                      <div class="col s12 bottom_area">
-                        <h4 class="center-align" style="color: #FFFFFF; margin-top: 30px">Reward: <span id="normal_reward"></span></h1>
-                        <h4 class="center-align isk_per_jump" style="color: #FFFFFF; margin-top: 40px">Per Jump: <span id="normal_reward_ipj"></span></h1>
+                      <div class="input-field col s12">
+                        <input style="color: green;" value="Leave Me Empty" id="reward" type="text" class="validate">
+                        <label for="reward">Reward</label>
                       </div>
+                      <div class="input-field col s12">
+                        <input style="color: green;" value="Leave Me Empty" id="reward_ipj" type="text" class="validate">
+                        <label for="reward_ipj">Reward Per Jump</label>
+                      </div>
+                      <p class="left-align" style="margin-left: 10px">
+                        <input type="checkbox" class="filled-in" id="lowsec"/>
+                        <label for="lowsec">Lowsec</label>
+                      </p>
                     </div>
                   </div>
               </div>
             </div>
           </div>
-          <!--<hr>-->
-          <!-- Options Area -->
-          <form action="#">
-            <p class="center-align">
-              <input type="checkbox" class="filled-in" id="rush"/>
-              <label for="rush">Rush Delivery &nbsp;&nbsp;</label>
-              <input type="checkbox" class="filled-in" id="lowsec"/>
-              <label for="lowsec">Lowsec</label>
-            </p>
-          </form>
           <!-- Footer -->
           <div class="disclaimer_footer">
             <p class="center-align" style="color: #FFFFFF"><span style="color: yellow">Disclaimer: </span>The Final Price is entirely up to yourself.</p>
