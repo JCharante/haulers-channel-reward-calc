@@ -24,10 +24,46 @@
       }
 
       */
-
+      // Used by the auto copy to clipboard
       var stuff_to_copy_to_clipboard = "";
 
+      // Puts commas in input field
+      $('#collateral').keyup(function(event) {
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+        // format number
+        $(this).val(function(index, value) {
+          return value
+          .replace(/\D/g, "")
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          ;
+        });
+      });
+
+      // Puts commas in input field
+      $('#jumps').keyup(function(event) {
+        // skip for arrow keys
+        if(event.which >= 37 && event.which <= 40) return;
+        // format number
+        $(this).val(function(index, value) {
+          return value
+          .replace(/\D/g, "")
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          ;
+        });
+      });
+
       $('.output_area').click(function() {
+        // Copies price to clipboard when the output area is clicked
+        copyTextToClipboard(stuff_to_copy_to_clipboard);
+      });
+
+      $('.disclaimer_footer').click(function() {
+        // Copies price to clipboard when the output area is clicked
+        copyTextToClipboard(stuff_to_copy_to_clipboard);
+      });
+
+      $('.header').click(function() {
         // Copies price to clipboard when the output area is clicked
         copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
@@ -35,7 +71,10 @@
       $('html').click(function() {
         // Reward Rates by Rita Jita, site made by Rashad Charante
         var collateral = $('#collateral').val();
+        // Sanitizes inputs by getting rid of commas and other stuff
+        collateral = collateral.replace(/[^\d\.\-\ ]/g, '');
         var jumps = $('#jumps').val();
+        jumps = jumps.replace(/[^\d\.\-\ ]/g, '');
         var reward = 0;
         var base_rate = 0;
         // Shamelessly ripped from stack overflow
@@ -75,8 +114,8 @@
         
         // updates prices displayed in text
         if (reward > 0) {
-          $('#normal_reward').text(numberWithCommas(reward));
-          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps));
+          $('#normal_reward').text(numberWithCommas(reward) + " ISK");
+          $('#normal_reward_ipj').text(numberWithCommas(reward / jumps) + " ISK");
           stuff_to_copy_to_clipboard = reward;
         }
       });
@@ -91,14 +130,14 @@
           <!-- Header -->
           <div class="header col s12">
             <h1 class="center-align" style="color: #FFFFFF">Haulers Channel</h1>
-            <h4 class="grey-text darken-3 center-align" style="margin-top: -20px; margin-bottom: 40px">Base Rate Calculator</h4>
+            <h4 class="grey-text darken-3 center-align" style="margin-top: -20px; margin-bottom: 60px">Base Rate Calculator</h4>
           </div>
           <!--<hr>-->
           <!-- Input Area -->
           <div class="col s12 input_area">
             <div class="row">
               <!-- Left Side -->
-              <div class="col s4">
+              <div class="col s4 offset-s2">
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
@@ -113,14 +152,14 @@
                 </form>
               </div>
               <!-- Right Side -->
-              <div class="col s8">
+              <div class="col s6">
                   <!-- Output Area -->
                   <div class="col s12 output_area">
                     <div class="row">
                       <!-- Bottom Area -->
                       <div class="col s12 bottom_area">
-                        <h4 class="center-align" style="color: #FFFFFF">Reward: <span id="normal_reward"></span></h1>
-                        <h4 class="center-align isk_per_jump" style="color: #FFFFFF">ISK Per Jump: <span id="normal_reward_ipj"></span></h1>
+                        <h4 class="left-align" style="color: #FFFFFF; margin-top: 30px">Reward: <span id="normal_reward"></span></h1>
+                        <h4 class="left-align isk_per_jump" style="color: #FFFFFF; margin-top: 40px">Per Jump: <span id="normal_reward_ipj"></span></h1>
                       </div>
                     </div>
                   </div>
@@ -138,13 +177,12 @@
             </p>
           </form>
           <!-- Footer -->
-          <!--<hr>-->
-          <p class="center-align" style="color: #FFFFFF"><span style="color: yellow">Disclaimer: </span>The Final Price is entirely up to yourself.</p>
-          <p class="center-align" style="color: #FFFFFF"> This calculator is intended for people new to courier contracts, anything under these values will normally move slower than normal., and posibly not at all.
-          </p>
-          <p class="center-align" style="color: #FFFFFF">
-          Note: <i>The more you pay </i> = the less you wait.
-          </p>
+          <div class="disclaimer_footer">
+            <p class="center-align" style="color: #FFFFFF"><span style="color: yellow">Disclaimer: </span>The Final Price is entirely up to yourself.</p>
+            <p class="center-align" style="color: #FFFFFF"> This calculator is intended for people new to courier contracts, anything under</p>
+            <p class="center-align" style="color: #FFFFFF">these values will normally move slower than normal., and posibly not at all.</p>
+            <p class="center-align" style="color: #FFFFFF"><strong>Note: <i>The more you pay </i> = the less you wait.</strong></p>
+          </div>
         </div>
       </div>
     </div>
