@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 
 <head>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style-ogb.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"></script>
   <script src="utils.js"></script>
   <script>
     $(document).ready(function(){
 
-      new Clipboard('i');
-      new Clipboard('p');
-
-      /*
-      // Commented out because on many browsers if this isn't triggered by a click it'll return a false negative
-      var copySupported = document.queryCommandSupported('copy');
-      
-      if (!copySupported) {
-        // This also isn't working :/
-        $("<p class='center-align' data-clipboard-target='#normal_reward'>Copy To Clipboard</p>").before('.isk_per_jump');
-      }
-
-      */
       // Used by the auto copy to clipboard
       var stuff_to_copy_to_clipboard = "";
 
@@ -67,6 +53,14 @@
         // Copies price to clipboard when the output area is clicked
         copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
+
+      $('#collateral_label').click(function() {
+        $('#collateral_label').addClass('active');
+      })
+
+      $('#jumps_label').click(function() {
+        $('#jumps_label').addClass('active');
+      })
 
       $('html').click(function() {
         // Reward Rates by Rita Jita, site made by Rashad Charante
@@ -146,11 +140,11 @@
                   <div class="row">
                     <div class="input-field col s12">
                       <input id="collateral" type="text" class="validate">
-                      <label for="collateral">Collateral</label>
+                      <label id="collateral_label" for="collateral">Collateral</label>
                     </div>
                     <div class="input-field col s12">
                       <input id="jumps" type="text" class="validate">
-                      <label for="jumps"># of Jumps</label>
+                      <label id="jumps_label" for="jumps"># of Jumps</label>
                     </div>
                     <p class="left-align" style="margin-left: 10px">
                       <input type="checkbox" class="filled-in" id="rush"/>
