@@ -53,4 +53,4 @@ function copyTextToClipboard(text) {
     }
 
     document.body.removeChild(textArea);
-    }
+}
