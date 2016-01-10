@@ -39,28 +39,18 @@
         });
       });
 
-      $('.output_area').click(function() {
+      $('#reward').click(function() {
         // Copies price to clipboard when the output area is clicked
         copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
 
-      $('.disclaimer_footer').click(function() {
-        // Copies price to clipboard when the output area is clicked
-        copyTextToClipboard(stuff_to_copy_to_clipboard);
-      });
-
-      $('.header').click(function() {
-        // Copies price to clipboard when the output area is clicked
-        copyTextToClipboard(stuff_to_copy_to_clipboard);
-      });
-
-      $('#collateral_label').click(function() {
+      $('#collateral').click(function() {
         $('#collateral_label').addClass('active');
-      })
+      });
 
-      $('#jumps_label').click(function() {
+      $('#jumps').click(function() {
         $('#jumps_label').addClass('active');
-      })
+      });
 
       $('html').click(function() {
         // Reward Rates by Rita Jita, site made by Rashad Charante
@@ -132,7 +122,7 @@
           </div>
           <!--<hr>-->
           <!-- Input Area -->
-          <div class="col s12 input_area" style="margin-left: 15px;">
+          <div class="col s12 input_area" style="margin-left: -40px;">
             <div class="row">
               <!-- Left Side -->
               <div class="col s2 offset-s4">
@@ -154,25 +144,22 @@
                 </form>
               </div>
               <!-- Right Side -->
-              <div class="col s2" style="margin-left: -21px">
-                  <!-- Output Area -->
-                  <div class="col s12 output_area">
-                    <div class="row bottom_area">
-                      <!-- Bottom Area -->
-                      <div class="input-field col s12">
-                        <input style="color: green;" id="reward" type="text" class="validate">
-                        <label id="reward_label" for="reward">Reward</label>
-                      </div>
-                      <div class="input-field col s12">
-                        <input style="color: green;" id="reward_ipj" type="text" class="validate">
-                        <label id="reward_ipj_label" for="reward_ipj">Reward Per Jump</label>
-                      </div>
-                      <p class="left-align" style="margin-left: 10px">
-                        <input type="checkbox" class="filled-in" id="lowsec"/>
-                        <label for="lowsec">Lowsec</label>
-                      </p>
-                    </div>
+              <div class="col s2" style="margin-left: 0px">
+                <div class="row bottom_area output_area">
+                  <!-- Output Area/Bottom Area -->
+                  <div class="input-field col s12">
+                    <input style="color: green;" id="reward" type="text" class="validate">
+                    <label id="reward_label" for="reward">Reward</label>
                   </div>
+                  <div class="input-field col s12">
+                    <input style="color: green;" id="reward_ipj" type="text" class="validate">
+                    <label id="reward_ipj_label" for="reward_ipj">Reward Per Jump</label>
+                  </div>
+                  <p class="left-align" style="margin-left: 10px">
+                    <input type="checkbox" class="filled-in" id="lowsec"/>
+                    <label for="lowsec">Lowsec</label>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
