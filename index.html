@@ -4,7 +4,7 @@
   <script>
   	$(document).ready(function(){
   		ua = $('#UserAgent').val(navigator.userAgent);
-  		if (s.indexOf("EVE-IGB") > -1) {
+  		if (ua.indexOf("EVE-IGB") > -1) {
   			window.location.replace("http://jcharante.github.io/haulers-channel-reward-calc/igb.html");
   		} else {
   			window.location.replace("http://jcharante.github.io/haulers-channel-reward-calc/ogb.html");
