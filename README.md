@@ -1,2 +1,2 @@
 # haulers-channel-reward-calc
-A reward calculator for haulers channel
+A Shipping Contract Reward Calculator for Eve Online's Haulers Channel commissioned by Rita Jita
