@@ -40,18 +40,28 @@
         });
       });
 
-      $('#reward').click(function() {
+      $('.output_area').click(function() {
         // Copies price to clipboard when the output area is clicked
         copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
 
-      $('#collateral').click(function() {
-        $('#collateral_label').addClass('active');
+      $('.disclaimer_footer').click(function() {
+        // Copies price to clipboard when the output area is clicked
+        copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
 
-      $('#jumps').click(function() {
-        $('#jumps_label').addClass('active');
+      $('.header').click(function() {
+        // Copies price to clipboard when the output area is clicked
+        copyTextToClipboard(stuff_to_copy_to_clipboard);
       });
+
+      $('#collateral_label').click(function() {
+        $('#collateral_label').addClass('active');
+      })
+
+      $('#jumps_label').click(function() {
+        $('#jumps_label').addClass('active');
+      })
 
       $('html').click(function() {
         // Reward Rates by Rita Jita, site made by Rashad Charante
@@ -60,33 +70,42 @@
         collateral = collateral.replace(/[^\d\.\-\ ]/g, '');
         var jumps = $('#jumps').val();
         jumps = jumps.replace(/[^\d\.\-\ ]/g, '');
+        // Set a basic minimum percentage of the collateral that we will take.
+        var baseColPercentage = 0.005;
+        // Set a basic pickup fee to this percentage of the collateral
+        // This will be capped to 1% maximum further down.
+        var pickupFee = 0;
+        // Set the minimum/basic price per jump
+        var pricePerJump = 500000;
+        // Increase the precentage of the collateral that we take based on jumps by this percentage
+        // This is to reflect the increased risk and time spent by the hauler.
+        var incPerJump = 1.002; 
+        var pickupReward = 0;
         var reward = 0;
-        var base_rate = 0;
+        var baseRate = 0;
         // Shamelessly ripped from stack overflow
         function numberWithCommas(x) {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Base Rate
-        if (jumps <= 10) {
-          base_rate = 1000000;
-        } else {
-          if (jumps <= 15) {
-            base_rate = 750000;
-          } else {
-            if (jumps <= 25) {
-              base_rate = 500000;
-            } else {
-              base_rate = 250000;
-            }
-          }
+        // Let's do some magic then
+        baseRate = pricePerJump*jumps;
+        
+        for (i = 1; i < jumps; i++) {
+            baseColPercentage += 0.001;
+            if (baseColPercentage >= 0.01) { break; }
         }
-        // Reward
-        if (collateral * 0.001 < base_rate) {
-          reward = base_rate * jumps;
-        } else {
-          reward = collateral * 0.001 * jumps;
+        
+        pickupFee = collateral*baseColPercentage;
+        pickupReward = pickupFee*incPerJump^jumps;
+        reward = baseRate+pickupReward;
+        
+        if (collateral*0.001*jumps > reward) {
+            reward = collateral*0.001*jumps;
         }
+
+        // Let's round up to make it look purdy
+        reward = Math.round(reward/1000)*1000;
 
         // Extra Fees
         if ($('#rush').prop('checked')) {
