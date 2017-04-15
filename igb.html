@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style-igb.css">
   <script src="utils.js"></script>
-  <script>
+ <script>
     $(document).ready(function(){
 
       // Used by the auto copy to clipboard
@@ -115,7 +115,9 @@
         if ($('#lowsec').prop('checked')) {
           reward = reward * 2;
         }
-        
+        if (collateral <= 1000000) {
+          reward = collateral*0.3;
+        }
         // updates prices displayed in text
         if (reward > 0) {
           $('#reward_label').addClass('active');
