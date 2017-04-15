@@ -115,7 +115,7 @@
         if ($('#lowsec').prop('checked')) {
           reward = reward * 2;
         }
-        if (collateral < 1000000) {
+        if (collateral <= 1000000) {
           reward = collateral*0.1;
         }
         // updates prices displayed in text
