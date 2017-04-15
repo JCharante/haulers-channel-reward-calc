@@ -103,20 +103,21 @@
         if (collateral*0.001*jumps > reward) {
             reward = collateral*0.001*jumps;
         }
-
+               
+        if (reward >= (collateral*0.5) ) {
+          reward = collateral*0.3;
+        }
+        
         // Let's round up to make it look purdy
         reward = Math.round(reward/1000)*1000;
-
+        
         // Extra Fees
         if ($('#rush').prop('checked')) {
           reward = reward * 2;
         }
-
+        
         if ($('#lowsec').prop('checked')) {
           reward = reward * 2;
-        }
-        if (collateral <= 1000000) {
-          reward = collateral*0.3;
         }
         // updates prices displayed in text
         if (reward > 0) {
