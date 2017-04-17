@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style-igb.css">
   <script src="utils.js"></script>
-  <script>
+ <script>
     $(document).ready(function(){
 
       // Used by the auto copy to clipboard
@@ -103,19 +103,22 @@
         if (collateral*0.001*jumps > reward) {
             reward = collateral*0.001*jumps;
         }
-
+               
+        if (reward >= (collateral*0.5) ) {
+          reward = collateral*0.3;
+        }
+        
         // Let's round up to make it look purdy
         reward = Math.round(reward/1000)*1000;
-
+        
         // Extra Fees
         if ($('#rush').prop('checked')) {
           reward = reward * 2;
         }
-
+        
         if ($('#lowsec').prop('checked')) {
           reward = reward * 2;
         }
-        
         // updates prices displayed in text
         if (reward > 0) {
           $('#reward_label').addClass('active');
