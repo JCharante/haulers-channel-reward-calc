@@ -1,13 +1,13 @@
 .round_box {
-	border-radius: 20px;z
+  border-radius: 20px;z
 }
 
 i {
-	display: inline-block;
+  display: inline-block;
 }
 
 @font-face { font-family: aldhabi; src: url('aldhabi.otf'); }
 
 .title {
-	font-family: aldhabi;
+  font-family: aldhabi;
 }
